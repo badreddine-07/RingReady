@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('kO.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+/* ضبط خصائص الزر */
+
+.boxee {
+    font-size: 40px;
+    background-color: cornflowerblue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.boxee:hover {
+    background-color: royalblue;
+}
+
+/* تنسيق البطاقات */
+.card {
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 300px;
+    margin: 20px;
+    background-color: white;
+}
+
+/* ضبط حجم وصورة البطاقات */
+.card-img-top {
+    width: 100%;
+    height: 190px;
+    object-fit: cover; /* لضمان تناسب الصورة داخل الأبعاد دون تشويه */
+}
+
+/* تنسيق أزرار الشراء */
+.custom-btn {
+    background-color: #2883a7;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    text-decoration: none; /* إزالة التسطير من النص */
+    display: inline-block; /* لجعل العنصر يتصرف كزر */
+    transition: background-color 0.3s ease; /* تأثير عند التمرير على الزر */
+    cursor: pointer;
+}
+
+.custom-btn:hover {
+    background-color: #310458; /* لون الخلفية عند التمرير على الزر */
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 23px;
+}
+
+.search-container {
+    margin: 20px;
+    text-align: center;
+}
+
+#search-input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.logovvv {
+    position: fixed;
+    top: 12px;
+    left: 14px;
+    z-index: 1000;
+}
+
+.logovvv img {
+    width: 100px;
+    height: auto;
+}

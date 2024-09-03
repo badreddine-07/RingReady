@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Ring Ready</title>
+    <script src="productroutes.js"></script>
+</head>
+<body>
+    <div class="logovvv">
+        <img src="RR.PNG" alt="Ringready">
+    </div>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="ابحث عن منتج...">
+        <button onclick="searchProduct()">بحث</button>
+    </div>
+    <!-- أزرار التنقل بين الأقسام -->
+    <div class="button-group">
+        <button type="button" onclick="openPage('home')" class="boxee">Homme</button>
+        <button type="button" onclick="openPage('two')" class="boxee">Femme</button>
+        <button type="button" onclick="openPage('three')" class="boxee">Enfant</button>
+        <button type="button" onclick="openPage('four')" class="boxee">Marques</button>
+        <button type="button" onclick="openPage('five')" class="boxee">Promotion</button>
+    </div>
+
+    <!-- البطاقة الأولى -->
+    <div class="tabcontent" id="home">
+        <div class="card" style="width: 18rem;">
+            <img src="packring.jpeg" class="card-img-top" alt="Card Image">
+            <div class="card-body">
+                <h5 class="card-title">kits de boxe anglaise</h5>
+                <p class="card-text">metal boxe homme</p>
+                <h6>120TND</h6>
+                <!-- قسم التحكم في الكمية -->
+                <div class="quantity-control">
+                    <button onclick="decreaseQuantity()" class="btn btn-secondary">-</button>
+                    <span id="quantity" class="quantity-text">1</span>
+                    <button onclick="increaseQuantity()" class="btn btn-secondary">+</button>
+                </div>
+                <!-- زر الانتقال -->
+                <button onclick="buyProduct()" class="custom-btn">achat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- البطاقة الثانية -->
+    <div class="tabcontent" id="two">
+        <div class="card" style="width: 18rem;">
+            <img src="KNBSH-027-Pink-600x450.jpg" class="card-img-top" alt="Card Image">
+            <div class="card-body">
+                <h5 class="card-title">Pack de boxe pour les filles</h5>
+                <p class="card-text">Tout l'équipement de Boxe Venum est présenté sur cette page</p>
+                <h6>50TND</h6>
+                <!-- قسم التحكم في الكمية -->
+                <div class="quantity-control">
+                    <button onclick="decreaseQuantity()" class="btn btn-secondary">-</button>
+                    <span id="quantity" class="quantity-text">1</span>
+                    <button onclick="increaseQuantity()" class="btn btn-secondary">+</button>
+                </div>
+                <!-- زر الانتقال -->
+                <button onclick="buyProduct()" class="custom-btn">achat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- البطاقة الثالثة -->
+    <div class="tabcontent" id="three">
+        <div class="card" style="width: 18rem;">
+            <img src="red-sac-de-boxe-pour-enfants-de-3-a-10-ans-sac.webp" class="card-img-top" alt="Card Image">
+            <div class="card-body">
+                <h5 class="card-title">accessoire boxe enfant</h5>
+                <p class="card-text">le petit boxeur</p>
+                <h6>35TND</h6>
+                <!-- قسم التحكم في الكمية -->
+                <div class="quantity-control">
+                    <button onclick="decreaseQuantity()" class="btn btn-secondary">-</button>
+                    <span id="quantity" class="quantity-text">1</span>
+                    <button onclick="increaseQuantity()" class="btn btn-secondary">+</button>
+                </div>
+                <!-- زر الانتقال -->
+                <button onclick="buyProduct()" class="custom-btn">achat</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPage(pageName) {
+            var i, tabcontent;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";  // إخفاء جميع الصفحات
+            }
+            document.getElementById(pageName).style.display = "block";  // عرض الصفحة المحددة
+        }
+
+        // لجعل صفحة 'home' تظهر بشكل افتراضي عند تحميل الصفحة
+        document.getElementById('home').style.display = 'block';
+
+        function buyProduct() {
+            var phoneNumber = prompt("Enter your phone number:");
+            if (phoneNumber == null || phoneNumber == "") {
+                alert("Please enter your phone number.");
+            } else {
+                // Sending the phone number to the server
+                fetch('your-server-endpoint', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ phone: phoneNumber })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert("Phone number submitted successfully!");
+                    // Redirect or perform another action
+                    window.location.href = "index.html";
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+
+        // Example for quantity control
+        let quantity = 1;
+
+        function increaseQuantity() {
+            quantity++;
+            document.getElementById('quantity').innerText = quantity;
+        }
+
+        function decreaseQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantity').innerText = quantity;
+            }
+        }
+    </script>
+    <script>
+        function searchProduct() {
+            var input = document.getElementById('search-input').value.toLowerCase();
+            var cards = document.getElementsByClassName('card');
+
+            for (var i = 0; i < cards.length; i++) {
+                var title = cards[i].getElementsByClassName('card-title')[0].textContent.toLowerCase();
+                var description = cards[i].getElementsByClassName('card-text')[0].textContent.toLowerCase();
+
+                if (title.includes(input) || description.includes(input)) {
+                    cards[i].style.display = "block";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
